@@ -9,12 +9,12 @@ Summary:	A framework for building smart card aware applications in Python 2
 Summary(pl.UTF-8):	Szkielet do tworzenia w Pythonie 2 aplikacji wykorzystujących karty procesorowe
 Name:		python-%{module}
 # keep < 2.0.3 here for python2 support
-Version:	1.9.9
+Version:	2.0.2
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries/Python
 Source0:	https://downloads.sourceforge.net/pyscard/pyscard-%{version}.tar.gz
-# Source0-md5:	a8e94032ca8dec22a6c559a7afd41998
+# Source0-md5:	3dfd7c522c8a44029640cc5cf280ffd5
 URL:		https://sourceforge.net/projects/pyscard/
 BuildRequires:	pcsc-lite-devel
 BuildRequires:	rpm-pythonprov
@@ -85,13 +85,13 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_examplesdir}/python-%{module}-%{version}
 cp -a smartcard/Examples/* $RPM_BUILD_ROOT%{_examplesdir}/python-%{module}-%{version}
 find $RPM_BUILD_ROOT%{_examplesdir}/python-%{module}-%{version} -name '*.py' \
-	| xargs sed -i '1s|^#!.*python\b|#!%{__python}|'
+	| xargs sed -i '1s|/usr/bin/env python3|%{__python}|'
 %endif
 %if %{with python3}
 install -d $RPM_BUILD_ROOT%{_examplesdir}/python3-%{module}-%{version}
 cp -a smartcard/Examples/* $RPM_BUILD_ROOT%{_examplesdir}/python3-%{module}-%{version}
 find $RPM_BUILD_ROOT%{_examplesdir}/python3-%{module}-%{version} -name '*.py' \
-	| xargs sed -i '1s|^#!.*python\b|#!%{__python3}|'
+	| xargs sed -i '1s|/usr/bin/env python3|%{__python3}|'
 %endif
 
 %clean
