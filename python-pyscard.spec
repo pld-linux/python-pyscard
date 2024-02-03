@@ -2,18 +2,19 @@
 # Conditional build:
 %bcond_without	tests	# unit tests
 %bcond_without	python2 # CPython 2.x module
-%bcond_with	python3 # CPython 3.x module
+%bcond_with	python3 # CPython 3.x module [built from python3-pyscard.spec]
 
 %define 	module	pyscard
 Summary:	A framework for building smart card aware applications in Python 2
 Summary(pl.UTF-8):	Szkielet do tworzenia w Pythonie 2 aplikacji wykorzystujących karty procesorowe
 Name:		python-%{module}
-Version:	1.9.6
-Release:	8
+# keep < 2.0.3 here for python2 support
+Version:	1.9.9
+Release:	1
 License:	LGPL v2.1+
 Group:		Libraries/Python
 Source0:	https://downloads.sourceforge.net/pyscard/pyscard-%{version}.tar.gz
-# Source0-md5:	079343dbc469330e74dee8924bc8944e
+# Source0-md5:	a8e94032ca8dec22a6c559a7afd41998
 URL:		https://sourceforge.net/projects/pyscard/
 BuildRequires:	pcsc-lite-devel
 BuildRequires:	rpm-pythonprov
@@ -117,6 +118,7 @@ rm -rf $RPM_BUILD_ROOT
 %{py_sitedir}/smartcard/util/*.py[co]
 %dir %{py_sitedir}/smartcard/wx
 %{py_sitedir}/smartcard/wx/*.py[co]
+%{py_sitedir}/smartcard/wx/resources
 %{py_sitedir}/%{module}-%{version}-py*.egg-info
 %{_examplesdir}/%{name}-%{version}
 %endif
@@ -150,6 +152,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py3_sitedir}/smartcard/wx
 %{py3_sitedir}/smartcard/wx/*.py
 %{py3_sitedir}/smartcard/wx/__pycache__
+%{py3_sitedir}/smartcard/wx/resources
 %{py3_sitedir}/%{module}-%{version}-py*.egg-info
 %{_examplesdir}/python3-%{module}-%{version}
 %endif
